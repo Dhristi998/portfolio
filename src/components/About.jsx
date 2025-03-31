@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const About = () => {
     const containerVariants = {
@@ -22,38 +22,37 @@ const About = () => {
     return (
         <section
             id="about"
-            className="flex flex-col min-h-[70vh] lg:min-h-screen items-left justify-center px-4 md:px-6"
+            className="flex flex-col min-h-screen items-center justify-center px-6 md:px-12 py-12"
         >
             <motion.div
-                className="max-w-7xl mx-auto"
+                className="max-w-4xl mx-auto w-full text-center"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.2 }}
             >
+                {/* Section Heading */}
                 <motion.h2
-                    className="text-lg sm:text-lg lg:text-lg text-center tracking-wide font-bold mb-[10%]"
+                    className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6"
                     variants={textVariants}
+                    style={{ color: "#327039" }}
                 >
                     About Me
                 </motion.h2>
-                <motion.div>
-                    <motion.p
-                        className="text-sm md:text-sm lg:text-2xl leading-relaxed mb-6"
-                        variants={textVariants}
-                    >
-                        I’m Neel Shah, a software developer specializing in web design and UI/UX, with expertise in frameworks like React.js 
-                        and Tailwind CSS. I focus on creating efficient, scalable, and user-friendly solutions that solve real-world challenges.
-                    </motion.p>
-                    <motion.p
-                        className="text-sm md:text-sm lg:text-2xl leading-relaxed"
-                        variants={textVariants}
-                    >
-                        Currently pursuing a Bachelor’s degree in Computer Science with a specialization in Cybersecurity at Mukesh Patel 
-                        School of Technology Management and Engineering (Class of 2026), I’m passionate about blending innovation with 
-                        functionality to deliver impactful results.
-                    </motion.p>
-                </motion.div>
+
+                {/* Description */}
+                <motion.p
+                    className="text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700"
+                    variants={textVariants}
+                >
+                    I am <span className="font-semibold">Dhristi Palresha</span>, a dedicated B.Tech student in 
+                    Information Technology, projected to graduate in 2026. My academic focus lies predominantly in 
+                    <span className="font-semibold text-green-700"> machine learning</span>, complemented by a keen 
+                    interest in <span className="font-semibold text-green-700">bioinformatics</span>.  
+                    With aspirations to become a research analyst, I aim to leverage cutting-edge technologies to 
+                    address complex challenges and contribute meaningfully to societal progress and the betterment 
+                    of humanity.
+                </motion.p>
             </motion.div>
         </section>
     );

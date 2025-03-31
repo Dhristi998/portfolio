@@ -3,30 +3,34 @@ import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import About from "./components/About";
 import Skill from "./components/Skill";
-import Work from "./components/Work";
-import Footer from "./components/Footer";
+import RolesOfResponsibilities from "./components/Roles";
+import Project from "./components/Projects";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 const App = () => {
-  // Function to handle smooth scrolling to sections
+  // Smooth scrolling function
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    requestAnimationFrame(() => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    });
   };
 
   return (
     <>
-      <Navbar scrollToSection={scrollToSection} /> {/* Pass the scroll function as a prop */}
-      <div className="max-w-7xl mx-auto w-[90%] lg:w-[70%] px-6">
+      <Navbar scrollToSection={scrollToSection} />
+      <main>
         <HeroSection />
         <About />
         <Skill />
-        <Work />
+        <RolesOfResponsibilities />
+        <Project />
         <Contact />
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 };

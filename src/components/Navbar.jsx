@@ -1,141 +1,98 @@
-import React, { useEffect, useState } from "react";
-import { navItems } from "../constants"; // Adjust the path as necessary
-import { motion } from "framer-motion";
-import Logo from "../assets/logo.png"; // Import your Logo component
+import React, { useState, useEffect } from "react";
+import Logo from "../assets/logo.png"; // Adjust path if needed
+import { Menu, X } from "lucide-react"; // Import Lucide icons
+import { label } from "framer-motion/client";
+
+const navItems = [
+  { label: "Home", section: "hero" },
+  { label: "About", section: "about" },
+  {label: "My Skills ", section : "skills"},
+  {label: "Roles", section: "Roles"},
+  { label: "Projects", section: "work" },
+  { label: "Contact", section: "contact" },
+  {label : ""}
+];
 
 const Navbar = () => {
-  const [activeSection, setActiveSection] = useState(navItems[0].section); // Default to the first section
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [activeSection, setActiveSection] = useState(navItems[0].section);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Smooth Scroll Function
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      const yOffset = -80; // Adjust based on the height of your fixed navbar
-      const yPosition =
-        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const navbarHeight = document.querySelector("nav").offsetHeight; // Adjust for navbar
+      const yOffset = -navbarHeight - 10; // Ensures the section isn't hidden under navbar
+      const yPosition = section.getBoundingClientRect().top + window.scrollY + yOffset;
+  
       window.scrollTo({ top: yPosition, behavior: "smooth" });
+  
+      setTimeout(() => setActiveSection(sectionId), 300);
     }
+    setIsMenuOpen(false);
   };
+  
 
-  // IntersectionObserver to track active section
+  // IntersectionObserver for Active Section Highlighting
   useEffect(() => {
-    const sections = navItems.map((item) =>
-      document.querySelector(`#${item.section}`)
+    const sections = navItems.map((item) => document.getElementById(item.section));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0.4 } // Adjusted for better accuracy
     );
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.5, // Trigger when 50% of the section is visible
-    };
+    sections.forEach((section) => section && observer.observe(section));
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id); // Update the active section
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach((section) => {
-      if (section) observer.observe(section);
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
-    };
+    return () => sections.forEach((section) => section && observer.unobserve(section));
   }, []);
 
   return (
-    <motion.nav
-      className="sticky top-4 z-50 py-3 px-4 backdrop-blur-lg border border-neutral-700 rounded-full mx-auto w-[90%] lg:w-[70%] shadow-lg drop-shadow-[0_0_5px_rgba(255,255,255,0.4)]"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="container px-4 relative lg:text-sm">
-        {/* Navbar for larger screens */}
-        <div className="hidden lg:flex justify-between items-center">
-          <motion.div
-            className="flex items-center flex-shrink-0"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <motion.img src={Logo} alt="Logo" className="h-7 w-7 mr-2" />
-          </motion.div>
-          <ul className="flex items-center space-x-12">
-            {navItems.map((item, index) => (
-              <motion.li
-                key={index}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: 0.5 }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <motion.div className="relative inline-block">
-                  <motion.button
-                    onClick={() => scrollToSection(item.section)}
-                    className={`transition-all duration-500 ease-in-out transform ${
-                      activeSection === item.section
-                        ? "border-none text-black bg-gradient-to-r from-yellow to-cyan rounded-full px-4 py-2 shadow-lg scale-105"
-                        : "hover:bg-gradient-to-r from-yellow to-cyan bg-clip-text hover:shadow-xl hover:scale-110 hover:translate-y-1"
-                    }`}
-                  >
-                    {item.label}
-                  </motion.button>
-                </motion.div>
-              </motion.li>
-            ))}
-          </ul>
+    <nav className="fixed top-0 left-0 w-full bg-[#327039] shadow-md z-50">
+      <div className="container mx-auto px-6 lg:px-16 py-4 flex justify-between items-center">
+        {/* Logo */}
+        <div className="flex items-center">
+          <img src={Logo} alt="Logo" className="h-8 w-8 mr-2" />
+          <span className="font-semibold text-lg text-white">Brand</span>
         </div>
 
-        {/* Navbar for smaller screens */}
-        <div className="flex lg:hidden justify-center items-center w-full">
-          <ul className="flex items-center justify-center w-full space-x-3">
-            <motion.li
-              className="flex-none"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <motion.img src={Logo} alt="Logo" className="h-5 w-5 mr-3" />
-            </motion.li>
-            <div className="flex flex-row justify-center space-x-3">
-              {navItems.map((item, index) => (
-                <motion.li
-                  key={index}
-                  className="flex-initial text-center"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.5 }}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                >
-                  <motion.div className="relative inline-block">
-                    <motion.button
-                      onClick={() => scrollToSection(item.section)}
-                      className={`text-[0.7rem] transition-all duration-300 ease-in-out transform ${
-                        activeSection === item.section
-                          ? "border-none text-blink bg-gradient-to-r from-yellow to-cyan rounded-full px-2 py-1 shadow-lg scale-105"
-                          : "hover:bg-gradient-to-r from-yellow to-cyan bg-clip-text hover:shadow-xl hover:scale-110 hover:translate-y-1 rounded-md"
-                      }`}
-                    >
-                      {item.label}
-                    </motion.button>
-                  </motion.div>
-                </motion.li>
-              ))}
-            </div>
-          </ul>
-        </div>
+        {/* Mobile Menu Button */}
+        <button
+          className="lg:hidden text-white focus:outline-none"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        {/* Navigation Links */}
+        <ul
+          className={`lg:flex lg:items-center lg:space-x-6 
+            ${isMenuOpen ? "flex flex-col bg-white shadow-md w-full p-4 rounded-md" : "hidden"} 
+            absolute lg:relative top-16 lg:top-0 left-0 lg:flex-row lg:bg-transparent lg:shadow-none lg:p-0 transition-all duration-300`}
+        >
+          {navItems.map((item) => (
+            <li key={item.section} className="my-2 lg:my-0">
+              <button
+                onClick={() => scrollToSection(item.section)}
+                className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
+                  activeSection === item.section
+                    ? "bg-green-600 text-white"
+                    : "text-gray-800 hover:bg-gray-200"
+                }`}
+              >
+                {item.label}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

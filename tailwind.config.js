@@ -6,7 +6,8 @@ export default {
       colors: {
         'yellow': '#a7fd00',
         'cyan': '#09ff9b',
-        'blink': '#121212'
+        'bg-green': '#327039',
+        'bg-white' : '#F8EDD9'
       },
     },
   },

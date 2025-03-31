@@ -1,28 +1,29 @@
-import illustratorImg from "../assets/illustrator.png";
+
 import htmlImg from "../assets/html.png";
 import cssImg from "../assets/css.png";
 import javaImg from "../assets/java.png";
 import javascriptImg from "../assets/javascript.png";
 import cppImg from "../assets/cpp.png";
-import photoshopImg from "../assets/photoshop.png";
 import sqlImg from "../assets/sql.png";
 import reactImg from "../assets/react.png";
 import tailwindImg from "../assets/tailwind.png";
 import pythonImg from "../assets/python.png";
 import figmaImg from "../assets/figma.png";
 import framerImg from "../assets/framer.png";
-import cyberImg from "../assets/cyber.png";
-import munsocImg from "../assets/munsoc.png";
-import techfestImg from "../assets/techfest.png";
+import coming from "C:/portfolio/coming soon.png";
+import uniflixImg from "C:/portfolio/uniflix.png"; 
 
+// Navigation items
 export const navItems = [
   { label: "Home", section: "hero"},
   { label: "About", section: "about" },
   { label: "Skills", section: "skill" },
-  { label: "Work", section: "work" },
+  { label: "Projects", section: "Projects" },
+  { label: "Roles Of Responsibility", section: "Roles Of Responsibility" },
   { label: "Contact", section: "contact" },
 ];
 
+// Skills data
 export const skills = [
   { name: "HTML", imgSrc: htmlImg },
   { name: "CSS", imgSrc: cssImg },
@@ -34,31 +35,23 @@ export const skills = [
   { name: "Java", imgSrc: javaImg },
   { name: "SQL", imgSrc: sqlImg },
   { name: "C++", imgSrc: cppImg },
-  { name: "Illustrator", imgSrc: illustratorImg },
-  { name: "Photoshop", imgSrc: photoshopImg },
-  { name: "Figma", imgSrc: figmaImg },
 ];
 
+// Projects data
 export const projects = [
   {
-    title: "Cybersecurity Club",
-    description: "Developed website using relevant UI/UX.",
-    imageUrl: cyberImg,
-    link: "https://cyberclubmpstme.vercel.app/index.html",
+    title: "Uniflix",
+    description: "Developed using Machine Learning to detect facial expressions and suggest movies on HTML base files using JavaScript.",
+    imageUrl: uniflixImg,
+    link: "https://github.com/Dhristi998/Movie-Recommendations-based-on-facial-expressions-using-Machine-Learning",
     tools: [htmlImg, cssImg, javascriptImg],
   },
   {
-    title: "IIT Bombay's TWMUN",
-    description: "Under Secretary General for Design, 2023-24.",
-    imageUrl: techfestImg,
-    link: "https://www.instagram.com/twmun.iitb/",
-    tools: [illustratorImg], // Add tools used for this project
+    title: "Coming Soon!",
+    description: "",
+    imageUrl: coming,
+    link: " ",
+    tools: [],
   },
-  {
-    title: "MUN Society",
-    description: "Oversaw page design for two consecutive years, 2023-2025.",
-    imageUrl: munsocImg,
-    link: "https://www.instagram.com/munsoc_mpstme/",
-    tools: [illustratorImg, photoshopImg], // Add tools used for this project
-  },
+
 ];
