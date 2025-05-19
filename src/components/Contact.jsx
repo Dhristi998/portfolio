@@ -1,81 +1,52 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-
-const fadeInVariant = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.2, // Stagger animation for child elements
-            delayChildren: 0.1,  // Slight delay before starting animations
-        },
-    },
-};
+import profileImg from "../assets/portfolio_picture.jpg";
 
 const Contact = () => {
-    const { ref, inView } = useInView({
-        threshold: 0.3, // Trigger when 30% of the section is visible
-        triggerOnce: true, // Animation will only trigger once
-    });
-
-    return (
-        <motion.div
-            id="contact"
-            ref={ref}
-            className="flex flex-col items-center justify-center min-h-screen px-6 md:px-12 text-center"
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={staggerContainer}
+return (
+<section
+    className="min-h-screen flex items-center bg-black px-12 py-12 font-face"
+    style={{ color: "#927340" }}
+>
+    {/* Left side text */}
+    <div
+    className="flex flex-col justify-center flex-1 max-w-lg"
+    style={{ marginLeft: "15%" }}
+    >
+    <p className="text-3xl mb-10 opacity-100 font-face">I will see you around!</p>
+    <h1 className="text-white text-4xl font-semibold mb-5 font-face">
+        Contact Me for fun work stuff.<br />
+    </h1>
+    <div className="flex space-x-12 text-sm font-normal">
+        <a
+        href="mailto:dhristipalresha998@gmail.com"
+        className="underline"
+        style={{ color: "#927340" }}
         >
-            <div className="w-full max-w-4xl">
-                {/* Section Heading */}
-                <motion.h2
-                    className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8"
-                    variants={fadeInVariant}
-                    style={{ color: "#327039" }}
-                >
-                    Contact
-                </motion.h2>
+        Gmail
+        </a>
+        <a
+        href="https://linkedin.com/in/dhristi-palresha-a7b92720b/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline"
+        style={{ color: "#927340" }}
+        >
+        LinkedIn
+        </a>
+    </div>
+    </div>
 
-                {/* Email */}
-                <motion.p className="mb-8" variants={fadeInVariant}>
-                    <a
-                        href="mailto:dhristipalresha998@gmail.com"
-                        className="text-3xl sm:text-5xl font-medium inline-block transition-all duration-300 hover:scale-105 hover:text-black"
-                        style={{ color: "#327039" }}
-                    >
-                        dhristipalresha998@gmail.com
-                    </a>
-                </motion.p>
-
-                {/* Social Links */}
-                <motion.div className="flex flex-col space-y-6">
-                    {[
-                        { name: "LinkedIn", url: "https://linkedin.com/in/dhristi-palresha-a7b92720b/" },
-                        { name: "GitHub", url: "https://github.com/Dhristi998" },
-                    ].map((link, index) => (
-                        <motion.p key={index} variants={fadeInVariant}>
-                            <a
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-3xl sm:text-5xl font-medium inline-block transition-all duration-300 hover:scale-105 hover:text-black"
-                                style={{ color: "#327039" }}
-                            >
-                                {link.name}
-                            </a>
-                        </motion.p>
-                    ))}
-                </motion.div>
-            </div>
-        </motion.div>
-    );
+    {/* Right side image */}
+    <div className="flex-1 flex justify-end">
+    <img
+        src={profileImg}
+        alt="Profile"
+        className="max-w-md object-cover"
+        style={{ maxHeight: "90vh" }}
+    />
+    </div>
+</section> 
+);
 };
 
 export default Contact;

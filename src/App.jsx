@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import About from "./components/About";
 import Skill from "./components/Skill";
-import RolesOfResponsibilities from "./components/Roles";
+import Internships from "./components/Roles"; // ✅ Renamed for clarity
 import Project from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -26,7 +26,7 @@ const App = () => {
         <HeroSection />
         <About />
         <Skill />
-        <RolesOfResponsibilities />
+        <Internships /> {/* ✅ Updated name here for readability */}
         <Project />
         <Contact />
       </main>

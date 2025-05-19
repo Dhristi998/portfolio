@@ -1,82 +1,92 @@
+import React from "react";
 import { motion } from "framer-motion";
 
-const skills = [
-{ name: "React", imgSrc: "/images/react.png" },
-{ name: "JavaScript", imgSrc: "/images/javascript.png" },
-{ name: "Node.js", imgSrc: "/images/nodejs.png" },
-{ name: "Tailwind CSS", imgSrc: "/images/tailwind.png" },
-{ name: "Git", imgSrc: "/images/git.png" },
-{ name: "Firebase", imgSrc: "/images/firebase.png" },
-{ name: "MongoDB", imgSrc: "/images/mongodb.png" },
-{ name: "Next.js", imgSrc: "/images/nextjs.png" },
-{ name: "TypeScript", imgSrc: "/images/typescript.png" },
-{ name: "GraphQL", imgSrc: "/images/graphql.png" },
-];
-
-const Skill = () => {
+const Skills = () => {
 const containerVariants = {
-hidden: { opacity: 0 },
+hidden: { opacity: 0, y: 40 },
 visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, duration: 0.8, ease: "easeOut" },
+    y: 0,
+    transition: {
+    duration: 0.7,
+    ease: "easeOut",
+    staggerChildren: 0.2,
+    },
 },
 };
 
 const itemVariants = {
-hidden: { opacity: 0, y: 30 },
-visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+hidden: { opacity: 0, y: 20 },
+visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
+
+const skillCategories = [
+{
+    category: "Programming Languages",
+    skills: ["Python", "NodeJS", "ReactJS", "JavaScript", "HTML", "CSS", "SQL"],
+},
+{
+    category: "Data Science & ML Libraries",
+    skills: ["Pandas", "NumPy", "Scikit-Learn", "Matplotlib", "PyTorch"],
+},
+{
+    category: "Visualization Tools",
+    skills: ["Microsoft Power BI", "Tableau"],
+},
+{
+    category: "Graphic Design & Editing",
+    skills: [
+    "AutoCAD",
+    "Android Studio",
+    "Figma",
+    "Canva",
+    ],
+},
+{
+    category: "Other Technical Skills",
+    skills: ["UI/UX Design", "Robotic Process Automation (RPA) "],
+},
+];
 
 return (
 <section
-    id="skill"
-    className="flex flex-col min-h-screen items-center justify-center px-6 py-12"
+    id="skills"
+    className="relative flex flex-col min-h-screen items-start justify-center px-6 md:px-12 py-12 ml-[12vw] bg-black font-face"
 >
-    <div className="mx-auto w-full max-w-6xl">
-    {/* Section Title */}
-    <motion.h2
-        className="text-4xl sm:text-6xl md:text-8xl text-center font-bold mb-12"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{ color: "#327029" }}
+    <motion.div
+    className="relative z-10 w-[70vw] max-w-full"
+    variants={containerVariants}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.2 }}
+    >
+    <motion.h1
+        className="text-5xl sm:text-6xl md:text-7xl font-bold mb-16 text-[#927340] font-face"
+        variants={itemVariants}
     >
         My Skills
-    </motion.h2>
+    </motion.h1>
 
-    {/* Skills Grid */}
     <motion.div
-        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-10"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
     >
-        {skills.map((skill, index) => (
-        <motion.div
-            key={index}
-            className="flex flex-col items-center justify-center text-center rounded-lg"
-            variants={itemVariants}
-            whileHover={{ scale: 1.08, transition: { duration: 0.15 } }}
-        >
-            {/* Skill Icon */}
-            <motion.img
-            src={skill.imgSrc}
-            alt={skill.name}
-            className="h-14 w-14 sm:h-16 sm:w-16 rounded-lg mb-2 shadow-md"
-            variants={itemVariants}
-            />
-
-            {/* Skill Name */}
-            <motion.p className="text-sm md:text-base text-gray-700 font-medium" variants={itemVariants}>
-            {skill.name}
-            </motion.p>
+        {skillCategories.map(({ category, skills }, idx) => (
+        <motion.div key={idx} variants={itemVariants}>
+            <h2 className="text-3xl font-semibold mb-5 text-[#927340] custom-font">
+            {category}
+            </h2>
+            <ul className="list-disc list-inside text-[#927340] text-lg custom-font space-y-2">
+            {skills.map((skill, i) => (
+                <li key={i}>{skill}</li>
+            ))}
+            </ul>
         </motion.div>
         ))}
     </motion.div>
-    </div>
+    </motion.div>
 </section>
 );
 };
 
-export default Skill;
+export default Skills;

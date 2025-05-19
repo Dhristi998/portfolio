@@ -7,7 +7,7 @@
 /* Global Styles */
 html, body {
   background-color: #000000; /* Black background */
-  color: #F5F5DC; /* Beige text */
+  color: #efefd3; /* Beige text */
   font-family: 'Poppins', sans-serif; /* Example font */
   scroll-behavior: smooth; /* Enables smooth scrolling */
 }
@@ -18,10 +18,24 @@ a, button {
 
 a:hover, button:hover {
   color: #000000; /* Black text on hover */
-  background-color: #F5F5DC; /* Beige background */
+  background-color: #927340; /* Beige background */
   transition: all 0.3s ease-in-out;
 }
 
 html {
+  scroll-behavior: smooth;
+}
+
+
+@font-face {
+  font-family: 'Simple Michael';
+  src: url('/assets/SimpleMichael.otf') format('truetype'); /* Adjust path if needed */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  font-family: "Simple Michael";
   scroll-behavior: smooth;
 }

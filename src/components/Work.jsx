@@ -47,7 +47,7 @@ return (
     <motion.h1
     className="text-4xl sm:text-6xl md:text-8xl text-center font-bold mb-12"
     variants={itemVariants}
-    style={{ color: "#327309" }}
+    style={{ color: "#efefd3" }}
     >
     My Work
     </motion.h1>
